@@ -691,58 +691,63 @@ body.menu-open { overflow: hidden; }
   transform: translateY(0);
 }
 
-/* ===== Mobile / narrow ===== */
-@media (max-width: 900px) {
-  .header { padding: 0 16px; }
+/* ===== Mobile / narrow — full-screen hamburger drawer ===== */
+@media (max-width: 900px), (pointer: coarse) and (max-width: 1100px) {
+  .header { padding: 0 16px !important; }
 
-  .nav {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    background: rgba(10, 10, 12, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    padding: var(--header-h) 24px 24px;
+  /* Drawer: solid #0a0a0c (no alpha, no backdrop), full viewport, above everything */
+  header.header .nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;          /* iOS Safari dynamic viewport */
+    z-index: 9999 !important;
+    background: #0a0a0c !important;
+    background-color: #0a0a0c !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: calc(var(--header-h) + 16px) 24px 32px !important;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    display: flex;
+    display: flex !important;
+    overflow-y: auto;
   }
-  .nav.open { transform: translateX(0); }
-  .nav a {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--text);
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    padding: 18px 20px;
-    text-align: center;
-    line-height: 1.4;
-    box-sizing: border-box;
-    border-radius: 12px;
+  header.header .nav.open { transform: translateX(0) !important; }
+
+  header.header .nav a {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 18px 20px !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
   }
-  .nav a:hover, .nav a:active { background: rgba(255,255,255,0.04); color: var(--accent-cyan); }
-  .nav-lang {
-    margin-top: 12px;
-    font-size: 1rem;
-    padding: 10px 24px;
+  header.header .nav a:hover,
+  header.header .nav a:active { background: rgba(255,255,255,0.04) !important; color: var(--accent-cyan) !important; }
+  header.header .nav-lang {
+    margin-top: 16px !important;
+    font-size: 1rem !important;
+    padding: 10px 28px !important;
   }
 
-  .burger { display: flex; z-index: 201; position: relative; }
+  .burger { display: flex !important; z-index: 10000 !important; position: relative !important; }
   .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
   .burger.open span:nth-child(2) { opacity: 0; }
   .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
+  /* Layout below the header */
   .section { padding: 56px 20px 72px; }
 
-  .hero {
-    min-height: auto;
-    padding: 56px 20px 48px;
-  }
+  .hero { min-height: auto; padding: 56px 20px 48px; }
   .hero__cta { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
   .hero__subtitle { font-size: 1rem; }
@@ -754,11 +759,7 @@ body.menu-open { overflow: hidden; }
   .project-card { min-height: auto; }
   .project-card__content { padding: 24px 20px; }
 
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
 
   .contact__links { flex-direction: column; }
   .contact-link { width: 100%; justify-content: center; }
@@ -766,15 +767,12 @@ body.menu-open { overflow: hidden; }
   .footer { padding: 24px 20px; }
 }
 
-@media (min-width: 901px) {
-  .nav { display: flex !important; }
-}
+/* Lock body scroll while drawer is open */
+body.menu-open { overflow: hidden !important; position: fixed; width: 100%; }
 
-/* iOS Safari "Request Desktop Site" mitigation:
-   when input is coarse (touch) treat as mobile regardless of width */
-@media (pointer: coarse) and (max-width: 1100px) {
-  .nav:not(.open) { transform: translateX(100%); }
-  .burger { display: flex !important; z-index: 201; position: relative; }
+/* Desktop nav (force horizontal flex on wide screens with fine pointer) */
+@media (min-width: 901px) and (pointer: fine) {
+  .nav { display: flex !important; transform: none !important; position: static !important; height: auto !important; width: auto !important; background: transparent !important; }
 }
 
 /* ===== Reduced motion ===== */
