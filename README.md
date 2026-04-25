@@ -1,6 +1,6 @@
 # ekuznetsov.dev
 
-Personal site of **Evgenii Kuznetsov** — AI Engineer, Cyprus.
+Personal site of **Evgenii Kuznetsov** — AI Engineer.
 
 **Live:** [https://ekuznetsov.dev](https://ekuznetsov.dev)
 
@@ -21,12 +21,11 @@ Static site, plain HTML + CSS + JavaScript — no framework, no build step.
 
 - **Hero** — AI Engineer pitch
 - **Services** (6 cards) — AI agents, voice assistants, automation, AI testing, algo trading, consulting
-- **Projects** (5 cards):
+- **Projects** (4 cards):
   - Alice Assistant 3D — VRM avatar voice AI
   - AI Orchestrator — multi-agent loop
   - BTC Trader — algo trading on Bybit
   - Titan — AI-driven E2E + Visual Regression
-  - Cosplay Space — production Next.js marketplace
 - **Contact** — email, Telegram, GitHub, LinkedIn
 
 ## Internationalization (i18n)
