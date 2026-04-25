@@ -767,8 +767,10 @@ body.menu-open { overflow: hidden; }
   .footer { padding: 24px 20px; }
 }
 
-/* Lock body scroll while drawer is open */
-body.menu-open { overflow: hidden !important; position: fixed; width: 100%; }
+/* Lock body scroll while drawer is open. Avoid `position: fixed` on body —
+   it resets scroll position and breaks scrollIntoView from inside the drawer. */
+body.menu-open { overflow: hidden !important; }
+html.menu-open { overflow: hidden !important; }
 
 /* Desktop nav (force horizontal flex on wide screens with fine pointer) */
 @media (min-width: 901px) and (pointer: fine) {
