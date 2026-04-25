@@ -43,39 +43,20 @@
     });
   });
 
-  // ----- Burger menu -----
+  // ----- Burger menu (simple opaque overlay, body scroll left alone) -----
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('.nav');
   let drawerLock = false;
-  // Lock the page at the user's current scroll-y when the drawer opens.
-  // iOS Safari resets scroll to 0 when body has overflow:hidden — this preserves it.
-  let savedScrollY = 0;
-
-  function openDrawer() {
+  function closeDrawer() {
     if (!nav) return;
-    savedScrollY = window.scrollY || window.pageYOffset || 0;
-    burger && burger.classList.add('open');
-    nav.classList.add('open');
-    document.body.classList.add('menu-open');
-    document.documentElement.classList.add('menu-open');
-    // Pin the body in place at the saved offset so the page doesn't jump
-    document.body.style.top = '-' + savedScrollY + 'px';
-  }
-
-  function closeDrawer(opts) {
-    if (!nav) return;
-    var preserveScroll = opts && opts.preserveScroll;
     burger && burger.classList.remove('open');
     nav.classList.remove('open');
-    document.body.classList.remove('menu-open');
-    document.documentElement.classList.remove('menu-open');
-    document.body.style.top = '';
-    if (!preserveScroll) {
-      // Restore the scroll position the user was at when they opened the drawer
-      window.scrollTo(0, savedScrollY);
-    }
   }
-
+  function openDrawer() {
+    if (!nav) return;
+    burger && burger.classList.add('open');
+    nav.classList.add('open');
+  }
   if (burger && nav) {
     var lastTap = 0;
     burger.addEventListener('click', function (e) {
@@ -87,10 +68,8 @@
       drawerLock = true;
       e.preventDefault();
       e.stopPropagation();
-
       if (nav.classList.contains('open')) closeDrawer();
       else                                openDrawer();
-
       setTimeout(function () { drawerLock = false; }, 320);
     });
   }
