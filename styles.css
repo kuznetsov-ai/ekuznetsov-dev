@@ -803,3 +803,41 @@ body.menu-open { overflow: hidden; }
   transform: scale(1.1);
   box-shadow: 0 6px 24px rgba(42,171,238,0.4);
 }
+
+.alice-float {
+  position: fixed;
+  bottom: 28px;
+  right: 92px;
+  height: 52px;
+  padding: 0 18px 0 16px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.95), rgba(236,72,153,0.95));
+  border-radius: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 18px rgba(249,115,22,0.35);
+  z-index: 999;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.alice-float:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 28px rgba(249,115,22,0.5);
+  color: #fff;
+}
+.alice-fox { font-size: 1.4rem; line-height: 1; }
+.alice-label { white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .alice-float {
+    bottom: 92px;
+    right: 16px;
+    padding: 0 16px;
+    height: 48px;
+    font-size: 0.9rem;
+  }
+  .tg-float { right: 16px; bottom: 28px; }
+}
