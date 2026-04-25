@@ -538,20 +538,9 @@ body.menu-open { overflow: hidden; }
   margin-top: 48px;
 }
 
-/* First project becomes a featured wide tile on desktop */
+/* All project cards same size — 3 per row on desktop, 2 on tablet, 1 on mobile */
 @media (min-width: 1024px) {
-  .projects__grid > .project-card:first-child {
-    grid-column: span 8;
-    min-height: 340px;
-  }
-  .projects__grid > .project-card:first-child h3 {
-    font-size: 1.85rem;
-  }
-  .projects__grid > .project-card:first-child .project-card__content {
-    padding: 36px 36px 32px;
-  }
-  .projects__grid > .project-card:nth-child(2) { grid-column: span 4; }
-  .projects__grid > .project-card:nth-child(n+3) { grid-column: span 4; }
+  .projects__grid > .project-card { grid-column: span 4; }
 }
 
 .project-card {
