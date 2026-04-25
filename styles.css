@@ -619,6 +619,12 @@ body.menu-open { overflow: hidden; }
   font-size: 0.95rem;
 }
 
+.project-card__links {
+  margin-top: auto;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
 .project-card__link {
   margin-top: auto;
   font-size: 0.9rem;
@@ -631,6 +637,14 @@ body.menu-open { overflow: hidden; }
 .project-card__link:hover {
   opacity: 1;
   color: var(--accent-cyan);
+}
+.project-card__link--ghost {
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+.project-card__link--ghost:hover {
+  color: var(--text);
+  opacity: 1;
 }
 .project-card__link--muted {
   color: var(--text-muted);
