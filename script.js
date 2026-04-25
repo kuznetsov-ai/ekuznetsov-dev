@@ -64,19 +64,38 @@
   }
 
   // ----- Smooth scroll for anchor links (works through the drawer) -----
+  function headerOffset() {
+    var h = document.querySelector('.header');
+    return h ? h.getBoundingClientRect().height : 72;
+  }
+  function scrollToEl(target) {
+    var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset() - 8;
+    if (top < 0) top = 0;
+    try {
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    } catch (_) {
+      window.scrollTo(0, top);
+    }
+  }
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       var id = this.getAttribute('href');
-      if (id === '#') return;
+      if (id === '#' || id.length < 2) return;
       e.preventDefault();
       var target = document.querySelector(id);
       if (!target) return;
       var wasOpen = nav && nav.classList.contains('open');
-      if (wasOpen) closeDrawer();
-      // Wait one frame for the drawer transition + body.menu-open removal to settle,
-      // otherwise scrollIntoView fires while body is still locked.
-      var run = function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-      if (wasOpen) setTimeout(run, 320); else run();
+      if (wasOpen) {
+        closeDrawer();
+        // Wait for drawer transform transition (300ms) + body class flush
+        setTimeout(function () {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { scrollToEl(target); });
+          });
+        }, 320);
+      } else {
+        scrollToEl(target);
+      }
     });
   });
 })();
