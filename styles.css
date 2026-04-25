@@ -840,7 +840,7 @@ html.menu-open { overflow: hidden !important; }
 .alice-float {
   position: fixed;
   bottom: 28px;
-  right: 92px;
+  right: 28px;
   height: 52px;
   padding: 0 18px 0 16px;
   background: linear-gradient(135deg, rgba(249,115,22,0.95), rgba(236,72,153,0.95));
@@ -866,11 +866,10 @@ html.menu-open { overflow: hidden !important; }
 
 @media (max-width: 640px) {
   .alice-float {
-    bottom: 92px;
+    bottom: 28px;
     right: 16px;
     padding: 0 16px;
     height: 48px;
     font-size: 0.9rem;
   }
-  .tg-float { right: 16px; bottom: 28px; }
 }
