@@ -123,31 +123,90 @@ Firebase Hosting (project: ekuznetsov-dev)
 | `≥ 1024 px` | 3-col services grid, featured project tile (span 8 + span 4) |
 | `≥ 1280 px` | Section max-width 1280, denser padding |
 
-### 3.3 Mobile drawer (failure mode that bit hard)
+### 3.3 Mobile drawer — the lessons learned
 
-The trap: `body.menu-open { position: fixed }` resets `window.scrollY` on Safari. Anchor scroll
-inside the drawer became visual no-op because by the time `scrollIntoView` ran, the body was
-locked at scroll-y=0 and then unlocked back to current position.
+**Final paradigm:** drawer is just a full-viewport opaque overlay. Body scroll is **NOT locked**.
+This is the simplest design that doesn't fight any iOS Safari quirk.
 
-Fix:
+```css
+header.header .nav {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;     /* dynamic viewport — accounts for iOS bars */
+  z-index: 9999 !important;
+  background: #0a0a0c !important; /* fully opaque — body underneath invisible */
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+header.header .nav.open { transform: translateX(0) !important; }
+```
 
-1. `body.menu-open { overflow: hidden }` only — no `position: fixed`.
-2. Anchor link handler: `closeDrawer()` → `setTimeout(320 ms, () => requestAnimationFrame × 2,
-   then window.scrollTo({top: section.y - headerHeight - 8, behavior: 'smooth'}))`.
-3. The 320 ms matches the CSS transform transition; the double RAF ensures the body class change
-   has flushed before scrolling.
+#### Failed approaches and why
+
+| Tried | Why it broke |
+|---|---|
+| `body.menu-open { position: fixed; top: -scrollY }` | Worked on most browsers, but on iOS Safari it broke sticky header rendering, broke pull-to-refresh, and made scroll-up jittery. |
+| `body.menu-open { overflow: hidden }` only | iOS Safari quietly resets `window.scrollY` to 0 when overflow becomes hidden. User opens drawer → page scrolls to top behind the drawer → they close the drawer and find themselves at top of page, drawer "disappeared". |
+| `body.menu-open { overflow: hidden; position: fixed; top: -y }` + restore on close | Functionally correct but breaks `scrollIntoView` for anchor links; needs `setTimeout + RAF×2 + window.scrollTo` work-around per click. Lots of edge-cases. |
+| **No body lock at all (current)** | Body can technically scroll behind the drawer if the user dragged through it. But the drawer is fully opaque so they can't see it. Sticky header still works, pull-to-refresh still works, scroll-y is preserved by the browser, anchor links use a plain `setTimeout(320ms)` after close. |
+
+#### Tap handling
+
+Burger button has `touch-action: manipulation` (kills the 300 ms tap-delay) and a JS-level
+throttle (`drawerLock` + `lastTap`) to absorb the iOS Safari `tap → click` double-fire that
+sometimes left the drawer in a half-toggled state.
+
+#### Anchor links
+
+```js
+anchor.click → e.preventDefault()
+              → if (drawer.open) closeDrawer()
+              → setTimeout(scrollToEl, 320)        // matches drawer transition
+              → window.scrollTo({top: target.y - headerH - 8, behavior: 'smooth'})
+```
+
+`scrollToEl` accounts for the sticky header height so the section title doesn't sit hidden
+behind the bar.
 
 ### 3.4 Per-channel contact icons
 
 Each contact link gets `.contact-link--{email,tg,gh,li}` and inline SVG. Hover changes border /
 text / box-shadow to the brand colour:
 
-| Channel | Hover accent |
-|---|---|
-| Email | `var(--accent-cyan)` |
-| Telegram | `#2AABEE` (Telegram brand blue) |
-| GitHub | `#fff` |
-| LinkedIn | `#0a66c2` (LinkedIn brand blue) |
+| Channel | Hover accent | SVG used |
+|---|---|---|
+| Email | `var(--accent-cyan)` | Stroked envelope |
+| Telegram | `#2AABEE` (Telegram blue) | Filled paper-plane |
+| GitHub | `#fff` | Octocat |
+| LinkedIn | `#0a66c2` (LinkedIn blue) | "in" mark |
+
+The Email/Telegram pair uses the cyan accent already defined in `--accent-cyan`; the GitHub and
+LinkedIn pair pulls in their corresponding brand colours inline. Inline SVG is preferred over
+icon fonts (no extra request, perfect retina, easy to recolor with `currentColor`).
+
+### 3.5 Project cards — uniform grid
+
+Earlier the first project (Alice Assistant 3D) was rendered as a featured "wide tile"
+(`grid-column: span 8`) with the rest as `span 4`. Now **all 9 cards are equal** —
+`span 4` on desktop (3 per row), `span 6` on tablet (2 per row), `span 1` on mobile (1 column).
+This was an explicit design call after the first deploys felt unbalanced.
+
+Two cards have an extra Live link on top of the GitHub link:
+
+- **Alice Assistant 3D** → `Live →` `https://alice.ekuznetsov.dev` + `GitHub →` (muted)
+- **Mafia Parser** → `Live →` `https://mafia.ekuznetsov.dev` + `GitHub →` (muted)
+
+Markup pattern:
+
+```html
+<div class="project-card__links">
+  <a class="project-card__link"               href="...live...">Live →</a>
+  <a class="project-card__link project-card__link--ghost" href="...github...">GitHub →</a>
+</div>
+```
+
+Cyan link first (primary CTA), muted-grey link second (secondary).
 
 ---
 
@@ -285,15 +344,21 @@ ekuznetsov-dev/
 - **iOS Safari "Request Desktop Site"** can read viewport as 980+ px even on a 6-inch phone.
   CSS uses `(pointer: coarse) and (max-width: 1100px)` as the second mobile-rule trigger so
   the burger drawer still appears.
-- **`body.menu-open { position: fixed }` is forbidden** — kills anchor smooth-scroll. Use
-  `overflow: hidden` only.
+- **Never lock body scroll** behind the drawer (no `position: fixed`, no `overflow: hidden`
+  on body or html). It looks like the right thing to do but breaks iOS scroll-y, sticky header,
+  pull-to-refresh, and anchor smooth-scroll. The drawer being fully opaque is enough to hide
+  the body underneath.
 - **`hash` change** on anchor links must run AFTER drawer close — the close transition is
-  300 ms, our timer is 320 ms + 2 RAF.
+  300 ms, our timer is 320 ms before `scrollToEl`.
+- **Burger double-tap** on iOS — handled by `touch-action: manipulation` + a 300 ms JS throttle
+  (`drawerLock` + `lastTap`).
 - **Firebase TLS provisioning** is asynchronous and slow. The `web.app` URL works immediately;
   the custom domain takes 10–30 minutes for the Google-Trust-Services cert.
-- **Cloudflare DNS-only mode** — proxy is off. If we ever need WAF / rate-limit at the edge,
-  enable proxy and verify Firebase still recognises the cert (it does — they share Google CDN /
-  Fastly transport).
+- **Cloudflare DNS-only mode** — proxy is off on the apex/www. If we ever need WAF / rate-limit
+  at the edge, enable proxy and verify Firebase still recognises the cert (it does — they share
+  Google CDN / Fastly transport).
 - **Removing projects from the page**: also clean references in JSON-LD, social meta-tags, and
-  SOUL.md / PROJECTS.md in `alice-assistant-3d/workspace_guest/` so Aliska doesn't talk about
+  `SOUL.md` / `PROJECTS.md` in `alice-assistant-3d/workspace_guest/` so Aliska doesn't talk about
   things that are no longer on the page.
+- **English plural** — the section title and tag use `Contacts` (plural). Russian is `Контакты`.
+  Single-form `Contact` was pre-2026-04-25.
