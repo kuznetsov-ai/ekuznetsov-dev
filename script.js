@@ -46,6 +46,7 @@
   // ----- Burger menu -----
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('.nav');
+  let drawerLock = false;
   function closeDrawer() {
     if (!nav) return;
     burger && burger.classList.remove('open');
@@ -54,12 +55,27 @@
     document.documentElement.classList.remove('menu-open');
   }
   if (burger && nav) {
-    burger.addEventListener('click', function () {
+    // touch-action handled in CSS; we still guard against double-fire (iOS tap → click)
+    var lastTap = 0;
+    burger.addEventListener('click', function (e) {
+      // Throttle: ignore taps within 300 ms (mobile Safari sometimes fires twice)
+      var now = Date.now();
+      if (drawerLock || now - lastTap < 300) {
+        e.preventDefault(); e.stopPropagation(); return;
+      }
+      lastTap = now;
+      drawerLock = true;
+      e.preventDefault();
+      e.stopPropagation();
+
       const willOpen = !nav.classList.contains('open');
       burger.classList.toggle('open', willOpen);
       nav.classList.toggle('open', willOpen);
       document.body.classList.toggle('menu-open', willOpen);
       document.documentElement.classList.toggle('menu-open', willOpen);
+
+      // Match the CSS transform transition so the next tap can flip it cleanly
+      setTimeout(function () { drawerLock = false; }, 320);
     });
   }
 

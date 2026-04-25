@@ -167,6 +167,10 @@ body.menu-open { overflow: hidden; }
   border: none;
   cursor: pointer;
   padding: 8px;
+  touch-action: manipulation;        /* removes 300 ms tap delay on iOS */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .burger span {
   width: 24px;
