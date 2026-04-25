@@ -763,6 +763,17 @@ body.menu-open { overflow: hidden; }
   transform: translateY(0);
 }
 
+/* On mobile / coarse pointers / reduced motion: skip the reveal opacity gate
+   entirely. The IntersectionObserver threshold (0.1) + negative rootMargin
+   was leaving cards invisible while scrolling — the bug we ship-fixed. */
+@media (max-width: 900px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* ===== Mobile / narrow — full-screen hamburger drawer ===== */
 @media (max-width: 900px), (pointer: coarse) and (max-width: 1100px) {
   .header { padding: 0 16px !important; }
