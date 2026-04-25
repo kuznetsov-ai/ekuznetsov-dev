@@ -832,9 +832,17 @@ body.menu-open { overflow: hidden; }
   .footer { padding: 24px 20px; }
 }
 
-/* Lock body scroll while drawer is open. Avoid `position: fixed` on body —
-   it resets scroll position and breaks scrollIntoView from inside the drawer. */
-body.menu-open { overflow: hidden !important; }
+/* Lock body scroll while drawer is open. Body is pinned with position:fixed
+   and a JS-set negative `top` matching the saved scrollY — this is the only way
+   iOS Safari preserves the user's scroll position behind a drawer. The anchor-link
+   handler skips the restore and uses scrollToEl(target) instead. */
+body.menu-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  left: 0; right: 0;
+  /* `top` is set inline-style by openDrawer() to -scrollY */
+}
 html.menu-open { overflow: hidden !important; }
 
 /* Desktop nav (force horizontal flex on wide screens with fine pointer) */

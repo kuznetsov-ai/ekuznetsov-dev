@@ -47,18 +47,38 @@
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('.nav');
   let drawerLock = false;
-  function closeDrawer() {
+  // Lock the page at the user's current scroll-y when the drawer opens.
+  // iOS Safari resets scroll to 0 when body has overflow:hidden — this preserves it.
+  let savedScrollY = 0;
+
+  function openDrawer() {
     if (!nav) return;
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    burger && burger.classList.add('open');
+    nav.classList.add('open');
+    document.body.classList.add('menu-open');
+    document.documentElement.classList.add('menu-open');
+    // Pin the body in place at the saved offset so the page doesn't jump
+    document.body.style.top = '-' + savedScrollY + 'px';
+  }
+
+  function closeDrawer(opts) {
+    if (!nav) return;
+    var preserveScroll = opts && opts.preserveScroll;
     burger && burger.classList.remove('open');
     nav.classList.remove('open');
     document.body.classList.remove('menu-open');
     document.documentElement.classList.remove('menu-open');
+    document.body.style.top = '';
+    if (!preserveScroll) {
+      // Restore the scroll position the user was at when they opened the drawer
+      window.scrollTo(0, savedScrollY);
+    }
   }
+
   if (burger && nav) {
-    // touch-action handled in CSS; we still guard against double-fire (iOS tap → click)
     var lastTap = 0;
     burger.addEventListener('click', function (e) {
-      // Throttle: ignore taps within 300 ms (mobile Safari sometimes fires twice)
       var now = Date.now();
       if (drawerLock || now - lastTap < 300) {
         e.preventDefault(); e.stopPropagation(); return;
@@ -68,13 +88,9 @@
       e.preventDefault();
       e.stopPropagation();
 
-      const willOpen = !nav.classList.contains('open');
-      burger.classList.toggle('open', willOpen);
-      nav.classList.toggle('open', willOpen);
-      document.body.classList.toggle('menu-open', willOpen);
-      document.documentElement.classList.toggle('menu-open', willOpen);
+      if (nav.classList.contains('open')) closeDrawer();
+      else                                openDrawer();
 
-      // Match the CSS transform transition so the next tap can flip it cleanly
       setTimeout(function () { drawerLock = false; }, 320);
     });
   }
