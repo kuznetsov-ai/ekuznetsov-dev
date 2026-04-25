@@ -683,21 +683,46 @@ body.menu-open { overflow: hidden; }
 .contact-link {
   display: inline-flex;
   align-items: center;
-  padding: 16px 28px;
+  gap: 12px;
+  padding: 16px 26px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
   text-decoration: none;
   font-weight: 600;
-  transition: transform 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.contact-link svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
 }
 
-.contact-link:hover {
+/* Per-channel hover accent — each link lights in its brand colour */
+.contact-link--email:hover {
   border-color: var(--accent-cyan);
   color: var(--accent-cyan);
   transform: translateY(-2px);
   box-shadow: var(--glow-cyan);
+}
+.contact-link--tg:hover {
+  border-color: #2AABEE;
+  color: #2AABEE;
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(42, 171, 238, 0.25);
+}
+.contact-link--gh:hover {
+  border-color: #fff;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+}
+.contact-link--li:hover {
+  border-color: #0a66c2;
+  color: #4ea0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(10, 102, 194, 0.3);
 }
 
 /* ===== Footer ===== */

@@ -187,6 +187,51 @@
             <a href="https://github.com/kuznetsov-ai/titan" target="_blank" rel="noopener noreferrer" class="project-card__link" data-i18n="proj4.link">GitHub →</a>
           </div>
         </article>
+        <article class="project-card" data-tilt>
+          <div class="project-card__bg"></div>
+          <div class="project-card__content">
+            <span class="project-card__tag" data-i18n="proj5.tag">PWA · Voice AI</span>
+            <h3 data-i18n="proj5.title">Alice Assistant</h3>
+            <p data-i18n="proj5.desc">Основная Алиса — PWA + Chrome extension с голосом. OpenClaw runtime, Telegram-канал, память в Markdown-файлах. Работает локально через Claude Max.</p>
+            <a href="https://github.com/kuznetsov-ai/alice-assistant" target="_blank" rel="noopener noreferrer" class="project-card__link" data-i18n="proj5.link">GitHub →</a>
+          </div>
+        </article>
+        <article class="project-card" data-tilt>
+          <div class="project-card__bg"></div>
+          <div class="project-card__content">
+            <span class="project-card__tag" data-i18n="proj6.tag">Anti-fraud</span>
+            <h3 data-i18n="proj6.title">Sentinel Cyber</h3>
+            <p data-i18n="proj6.desc">Дашборд мониторинга торгового анти-фрода. Node.js + Express + SQLite + EJS. Собирает паттерны подозрительного поведения и алертит в реальном времени.</p>
+            <a href="https://github.com/kuznetsov-ai/sentinel-cyber" target="_blank" rel="noopener noreferrer" class="project-card__link" data-i18n="proj6.link">GitHub →</a>
+          </div>
+        </article>
+        <article class="project-card" data-tilt>
+          <div class="project-card__bg"></div>
+          <div class="project-card__content">
+            <span class="project-card__tag" data-i18n="proj7.tag">Django · i18n</span>
+            <h3 data-i18n="proj7.title">Mafia Website</h3>
+            <p data-i18n="proj7.desc">Платформа мафия-клубов: турниры, рейтинги, профили игроков. Django, SQLite/PostgreSQL, EN/RU/UK i18n, 20+ Playwright E2E тестов через Titan.</p>
+            <a href="https://github.com/kuznetsov-ai/mafia-website" target="_blank" rel="noopener noreferrer" class="project-card__link" data-i18n="proj7.link">GitHub →</a>
+          </div>
+        </article>
+        <article class="project-card" data-tilt>
+          <div class="project-card__bg"></div>
+          <div class="project-card__content">
+            <span class="project-card__tag" data-i18n="proj8.tag">Scraper · Stats</span>
+            <h3 data-i18n="proj8.title">Mafia Parser</h3>
+            <p data-i18n="proj8.desc">Анализатор статистики mafgame.org и imafia.org. Показывает с кем и сколько раз ты сидел за одним столом. Flask + BeautifulSoup, без headless-браузера.</p>
+            <a href="https://github.com/kuznetsov-ai/mafia-parser" target="_blank" rel="noopener noreferrer" class="project-card__link" data-i18n="proj8.link">GitHub →</a>
+          </div>
+        </article>
+        <article class="project-card" data-tilt>
+          <div class="project-card__bg"></div>
+          <div class="project-card__content">
+            <span class="project-card__tag" data-i18n="proj9.tag">CLI · Telegram</span>
+            <h3 data-i18n="proj9.title">Claude TG Bot</h3>
+            <p data-i18n="proj9.desc">Telegram-обёртка над Claude Code CLI: голос → Gemini-транскрипция → claude -p → ответ. Slash-команды маппятся на Claude Code skills. Запускается через launchd.</p>
+            <a href="https://github.com/kuznetsov-ai/claude-tg-bot" target="_blank" rel="noopener noreferrer" class="project-card__link" data-i18n="proj9.link">GitHub →</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -196,10 +241,31 @@
       <h2 class="section__title" data-i18n="contact.title">Связаться</h2>
       <p class="contact__text" data-i18n="contact.text">Пишите на email или в Telegram — отвечаю в тот же день.</p>
       <div class="contact__links">
-        <a href="mailto:iam@ekuznetsov.dev" class="contact-link" data-tilt>Email</a>
-        <a href="https://t.me/IT_Evgenii_Kuznetsov" target="_blank" rel="noopener noreferrer" class="contact-link" data-tilt>Telegram</a>
-        <a href="https://github.com/kuznetsov-ai" target="_blank" rel="noopener noreferrer" class="contact-link" data-tilt>GitHub</a>
-        <a href="https://www.linkedin.com/in/evgenii-kuznetsov/" target="_blank" rel="noopener noreferrer" class="contact-link" data-tilt>LinkedIn</a>
+        <a href="mailto:iam@ekuznetsov.dev" class="contact-link contact-link--email" data-tilt>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-10 6L2 7"/>
+          </svg>
+          <span>Email</span>
+        </a>
+        <a href="https://t.me/IT_Evgenii_Kuznetsov" target="_blank" rel="noopener noreferrer" class="contact-link contact-link--tg" data-tilt>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.944 3.069 18.65 19.418c-.244 1.072-1.38 1.582-2.243 1.006l-4.647-3.376-2.23 2.12c-.246.234-.568.364-.907.364-.677 0-1.226-.549-1.226-1.226V15.6l-3.52-1.154c-1.092-.346-1.105-1.486.208-2.036L20.14 2.195c1.147-.612 2.27.273 1.804 1.874Z"/>
+          </svg>
+          <span>Telegram</span>
+        </a>
+        <a href="https://github.com/kuznetsov-ai" target="_blank" rel="noopener noreferrer" class="contact-link contact-link--gh" data-tilt>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.31-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.6-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.83.58A12 12 0 0 0 12 .297Z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/evgenii-kuznetsov/" target="_blank" rel="noopener noreferrer" class="contact-link contact-link--li" data-tilt>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.55V9h3.57v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
       </div>
     </section>
   </main>
@@ -234,7 +300,7 @@
         'svc5.title': 'Алго-трейдинг и аналитика', 'svc5.desc': 'Стратегии на исторических данных, бэктесты, риск-менеджмент. Bybit / Binance API, ClickHouse, Python.',
         'svc6.title': 'AI-консалтинг', 'svc6.desc': 'Внедрение LLM в существующие продукты: где помогает, где нет, как мерить эффект и контролировать стоимость.',
         'projects.title': 'Проекты',
-        'projects.subtitle': 'Открытые исходники на GitHub и продакшн-продукты. Техно-стеки от Three.js до Python и Next.js.',
+        'projects.subtitle': '9 публичных репозиториев на GitHub — AI, голос, тестирование, трейдинг и больше. Стеки от Three.js до Python и Django.',
         'proj1.tag': 'AI · 3D', 'proj1.title': 'Alice Assistant 3D',
         'proj1.desc': '3D VRM-аватар голосового AI-ассистента. Three.js + @pixiv/three-vrm, Claude через прокси, Whisper STT, edge-tts. PWA с памятью и календарём.',
         'proj1.link': 'GitHub →',
@@ -247,6 +313,21 @@
         'proj4.tag': 'QA · AI', 'proj4.title': 'Titan',
         'proj4.desc': 'E2E + Visual Regression фреймворк. Claude анализирует скриншоты падений, выдаёт severity P0–P3. Multi-role, Slack-верификация, Playwright под капотом.',
         'proj4.link': 'GitHub →',
+        'proj5.tag': 'PWA · Voice AI', 'proj5.title': 'Alice Assistant',
+        'proj5.desc': 'Основная Алиса — PWA + Chrome extension с голосом. OpenClaw runtime, Telegram-канал, память в Markdown-файлах. Работает локально через Claude Max.',
+        'proj5.link': 'GitHub →',
+        'proj6.tag': 'Anti-fraud', 'proj6.title': 'Sentinel Cyber',
+        'proj6.desc': 'Дашборд мониторинга торгового анти-фрода. Node.js + Express + SQLite + EJS. Собирает паттерны подозрительного поведения и алертит в реальном времени.',
+        'proj6.link': 'GitHub →',
+        'proj7.tag': 'Django · i18n', 'proj7.title': 'Mafia Website',
+        'proj7.desc': 'Платформа мафия-клубов: турниры, рейтинги, профили игроков. Django, SQLite/PostgreSQL, EN/RU/UK i18n, 20+ Playwright E2E тестов через Titan.',
+        'proj7.link': 'GitHub →',
+        'proj8.tag': 'Scraper · Stats', 'proj8.title': 'Mafia Parser',
+        'proj8.desc': 'Анализатор статистики mafgame.org и imafia.org. Показывает с кем и сколько раз ты сидел за одним столом. Flask + BeautifulSoup, без headless-браузера.',
+        'proj8.link': 'GitHub →',
+        'proj9.tag': 'CLI · Telegram', 'proj9.title': 'Claude TG Bot',
+        'proj9.desc': 'Telegram-обёртка над Claude Code CLI: голос → Gemini-транскрипция → claude -p → ответ. Slash-команды маппятся на Claude Code skills. Запускается через launchd.',
+        'proj9.link': 'GitHub →',
         'contact.title': 'Связаться', 'contact.text': 'Пишите на email или в Telegram — отвечаю в тот же день.',
         'footer.text': '© 2026 Evgenii Kuznetsov',
         'alice.cta': 'Поговорить с Алисой',
@@ -268,7 +349,7 @@
         'svc5.title': 'Algo trading & analytics', 'svc5.desc': 'Historical-data strategies, backtests, risk management. Bybit / Binance APIs, ClickHouse, Python.',
         'svc6.title': 'AI consulting', 'svc6.desc': 'Embedding LLMs into existing products: where they help, where they don’t, how to measure ROI and control cost.',
         'projects.title': 'Projects',
-        'projects.subtitle': 'Open source on GitHub and live products. Stacks from Three.js to Python and Next.js.',
+        'projects.subtitle': '9 public repos on GitHub — AI, voice, testing, trading, and more. Stacks from Three.js to Python and Django.',
         'proj1.tag': 'AI · 3D', 'proj1.title': 'Alice Assistant 3D',
         'proj1.desc': '3D VRM avatar of a voice AI assistant. Three.js + @pixiv/three-vrm, Claude through a proxy, Whisper STT, edge-tts. PWA with memory and calendar.',
         'proj1.link': 'GitHub →',
@@ -281,6 +362,21 @@
         'proj4.tag': 'QA · AI', 'proj4.title': 'Titan',
         'proj4.desc': 'E2E + Visual Regression framework. Claude analyzes failure screenshots, severity P0–P3. Multi-role, Slack verification, Playwright under the hood.',
         'proj4.link': 'GitHub →',
+        'proj5.tag': 'PWA · Voice AI', 'proj5.title': 'Alice Assistant',
+        'proj5.desc': 'The main Alice — PWA + Chrome extension with voice. OpenClaw runtime, Telegram channel, memory in Markdown files. Runs locally through Claude Max.',
+        'proj5.link': 'GitHub →',
+        'proj6.tag': 'Anti-fraud', 'proj6.title': 'Sentinel Cyber',
+        'proj6.desc': 'Trading anti-fraud monitoring dashboard. Node.js + Express + SQLite + EJS. Surfaces suspicious behaviour patterns and alerts in real time.',
+        'proj6.link': 'GitHub →',
+        'proj7.tag': 'Django · i18n', 'proj7.title': 'Mafia Website',
+        'proj7.desc': 'Mafia game club platform — tournaments, rankings, player profiles. Django, SQLite/PostgreSQL, EN/RU/UK i18n, 20+ Playwright E2E tests via Titan.',
+        'proj7.link': 'GitHub →',
+        'proj8.tag': 'Scraper · Stats', 'proj8.title': 'Mafia Parser',
+        'proj8.desc': 'Stats analyzer for mafgame.org and imafia.org. Shows who you have sat at the same table with and how many times. Flask + BeautifulSoup, no headless browser.',
+        'proj8.link': 'GitHub →',
+        'proj9.tag': 'CLI · Telegram', 'proj9.title': 'Claude TG Bot',
+        'proj9.desc': 'Telegram wrapper over Claude Code CLI: voice → Gemini transcription → claude -p → reply. Slash commands map to Claude Code skills. Launched via launchd.',
+        'proj9.link': 'GitHub →',
         'contact.title': 'Contact', 'contact.text': 'Drop me an email or a Telegram message — same-day reply.',
         'footer.text': '© 2026 Evgenii Kuznetsov',
         'alice.cta': 'Talk to Alice',
