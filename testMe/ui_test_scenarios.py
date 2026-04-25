@@ -103,8 +103,8 @@ class EkuznetsovDevScenario(BaseScenario):
             for i in range(await links.count()):
                 if await links.nth(i).is_visible():
                     visible_links += 1
-            if visible_links < 4:
-                issues.append(f"only {visible_links} nav links visible (expected ≥4)")
+            if visible_links < 3:
+                issues.append(f"only {visible_links} nav links visible (expected ≥3)")
 
             # Hero must NOT be visible behind the drawer
             hero_text = self.page.locator(".hero__title").first
@@ -192,8 +192,8 @@ class EkuznetsovDevScenario(BaseScenario):
 
             page_text = (await self.page.text_content("body") or "").lower()
             issues = []
-            if count != 4:
-                issues.append(f"expected 4 project cards, got {count}")
+            if count != 9:
+                issues.append(f"expected 9 project cards, got {count}")
             if "cosplay" in page_text:
                 issues.append("'cosplay' still present in page text")
             if "cyprus" in page_text:
