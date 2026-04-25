@@ -26,7 +26,7 @@ Static site, plain HTML + CSS + JavaScript — no framework, no build step.
 
 - **Hero** — `AI Engineer` label + "AI agents, voice assistants, production LLM systems"
 - **What I do** (6 cards) — AI agents, voice assistants, AI-driven automation, AI-driven testing, algo trading & analytics, AI consulting
-- **Projects** (9 cards, all from public github.com/kuznetsov-ai):
+- **Projects** (11 cards, all from public github.com/kuznetsov-ai):
   1. **Alice Assistant 3D** — Three.js + VRM voice assistant
   2. **AI Orchestrator** — dual-agent loop (writer + reviewer)
   3. **BTC Trader** — algo trading bot for BTC/USDT on Bybit
@@ -36,6 +36,8 @@ Static site, plain HTML + CSS + JavaScript — no framework, no build step.
   7. **Mafia Website** — Django mafia-club platform with EN/RU/UK i18n
   8. **Mafia Parser** — stats analyzer for mafgame.org / imafia.org
   9. **Claude TG Bot** — Telegram wrapper over `claude -p` with voice transcription
+  10. **Studio CRM** — full-featured CRM for outstaff agencies (Django 5 + React 19 + WebSocket chat + AI assistant), public demo with daily-reset shared sandbox
+  11. **Fast Whisper** — local 1h-interview transcription in ~2.5 min on M5 Pro (mlx-whisper Apple Metal + `claude -p` semantic diarization → Google Doc), Fireflies replacement for hiring interviews
 - **Contact** — Email / Telegram / GitHub / LinkedIn (each with its own brand-coloured SVG icon and hover accent)
 - **Floating CTA** — `Поговорить с Алисой 🦊` → opens https://alice.ekuznetsov.dev (the public guest assistant)
 
