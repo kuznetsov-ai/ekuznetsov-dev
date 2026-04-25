@@ -238,6 +238,19 @@ body.menu-open { overflow: hidden; }
   overflow: hidden;
 }
 
+/* Desktop: tighten hero so sections start higher and content feels denser */
+@media (min-width: 1024px) {
+  .hero { min-height: 78vh; padding: 80px 24px 60px; }
+  .hero__title { font-size: clamp(3rem, 6.5vw, 5rem); }
+  .hero__subtitle { font-size: 1.2rem; max-width: 620px; }
+  .section { padding: 100px 24px 100px; }
+}
+
+@media (min-width: 1280px) {
+  .section { max-width: 1280px; padding-left: 32px; padding-right: 32px; }
+  .hero { max-width: 1280px; }
+}
+
 /* ===== Hero grid background ===== */
 .hero-bg-grid {
   position: absolute;
@@ -392,6 +405,13 @@ body.menu-open { overflow: hidden; }
   gap: 1.5px;
   background: var(--border-solid);
   margin-top: 40px;
+  border: 1px solid var(--border-solid);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .services__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 .service-card {
@@ -518,6 +538,22 @@ body.menu-open { overflow: hidden; }
   margin-top: 48px;
 }
 
+/* First project becomes a featured wide tile on desktop */
+@media (min-width: 1024px) {
+  .projects__grid > .project-card:first-child {
+    grid-column: span 8;
+    min-height: 340px;
+  }
+  .projects__grid > .project-card:first-child h3 {
+    font-size: 1.85rem;
+  }
+  .projects__grid > .project-card:first-child .project-card__content {
+    padding: 36px 36px 32px;
+  }
+  .projects__grid > .project-card:nth-child(2) { grid-column: span 4; }
+  .projects__grid > .project-card:nth-child(n+3) { grid-column: span 4; }
+}
+
 .project-card {
   position: relative;
   border-radius: var(--radius-lg);
@@ -604,12 +640,9 @@ body.menu-open { overflow: hidden; }
   color: var(--text-muted);
 }
 
-/* Grid: 2 cols on tablet, 3 on desktop */
-@media (min-width: 768px) {
+/* Grid: 2 cols on tablet, 3+featured on desktop (overrides above) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .project-card { grid-column: span 6; }
-}
-@media (min-width: 1024px) {
-  .project-card { grid-column: span 4; }
 }
 
 /* ===== Contact ===== */
