@@ -726,10 +726,10 @@ body.menu-open { overflow: hidden; }
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
 }
 .contact-link--li:hover {
-  border-color: #0a66c2;
-  color: #4ea0ff;
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
   transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(10, 102, 194, 0.3);
+  box-shadow: 0 0 40px rgba(240, 160, 32, 0.3);
 }
 
 /* ===== Footer ===== */
