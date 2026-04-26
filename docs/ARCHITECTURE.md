@@ -266,6 +266,13 @@ TXT  _acme-challenge.www.ekuznetsov.dev → <www ACME challenge>
 
 All written to Cloudflare via the Cloudflare REST API.
 
+> **CF account migration (2026-04-26):** zone moved from iDev account
+> (`idev43674@gmail.com`, NS `anuj/gemma.ns.cloudflare.com`) to balance account
+> (`i.want.balance.it@gmail.com`, NS `dane/melody.ns.cloudflare.com`). Zone id
+> in balance: `c2e05117a2493a207835c1e8966d4f13`. Old iDev zone deleted after
+> activation. Auth for new zone uses balance Global API Key
+> (`X-Auth-Email: i.want.balance.it@gmail.com` + `X-Auth-Key`).
+
 ### 6.3 Existing DNS at Cloudflare zone `ekuznetsov.dev`
 
 | Type | Name | Value | Proxy |
